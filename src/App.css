@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
@@ -41,14 +41,8 @@
   color: #888;
 }
 
-* {
-  margin: 10px;
-}
-
-/* .App {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+/* * {
+  margin: 0.1em;
 } */
 
 .nc-news {
@@ -96,4 +90,30 @@ ul {
 
 .menu-item {
   margin: 0 10px;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  padding: 1em;
+}
+
+h2 {
+  padding: 1em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
 }
