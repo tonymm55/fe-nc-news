@@ -40,3 +40,60 @@
 .read-the-docs {
   color: #888;
 }
+
+* {
+  margin: 10px;
+}
+
+/* .App {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+} */
+
+.nc-news {
+  color: limegreen;
+}
+
+ul {
+  text-decoration: none;
+}
+
+.sell {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.navbar li {
+  float: left;
+}
+
+.nav-links {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-links li {
+  margin: 0 20px;
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.menu-item {
+  margin: 0 10px;
+}
