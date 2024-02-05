@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
@@ -39,4 +39,81 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* * {
+  margin: 0.1em;
+} */
+
+.nc-news {
+  color: limegreen;
+}
+
+ul {
+  text-decoration: none;
+}
+
+.sell {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.navbar li {
+  float: left;
+}
+
+.nav-links {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-links li {
+  margin: 0 20px;
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.menu-item {
+  margin: 0 10px;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  padding: 1em;
+}
+
+h2 {
+  padding: 1em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
 }
