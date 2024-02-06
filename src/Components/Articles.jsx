@@ -14,17 +14,16 @@ function Articles() {
       });
     } else {
       fetchArticles(selectedTopic).then((response) => {
-        console.log(selectedTopic, "<<< Selected Topic (Articles)");
         setArticles(response.data.articles);
       });
     }
   }, [selectedTopic]);
 
   return (
-    <div>
+    <>
       <Topic setSelectedTopic={setSelectedTopic} />
       <ArticleList articles={articles} selectedTopic={selectedTopic} />
-    </div>
+    </>
   );
 }
 

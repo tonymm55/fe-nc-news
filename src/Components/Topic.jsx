@@ -11,7 +11,6 @@ function Topic({ setSelectedTopic }) {
     setSelectedTopic(topic);
   };
 
-  // This return renders the "Browse Articles By Topic" button in the Articles Component. Home renders the Article component
   return (
     <div>
       <button onClick={handleOpen}>Browse Articles By Topic</button>

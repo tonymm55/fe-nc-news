@@ -41,9 +41,9 @@
   color: #888;
 }
 
-/* * {
+* {
   margin: 0.1em;
-} */
+}
 
 .nc-news {
   color: limegreen;
@@ -61,7 +61,7 @@ ul {
 .navbar ul {
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding-top: 1em;
   overflow: hidden;
 }
 
@@ -73,7 +73,7 @@ ul {
   list-style-type: none;
   padding: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
 .nav-links li {
@@ -103,7 +103,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-  padding: 1em;
+  padding: 0.75em;
 }
 
 h2 {
@@ -113,7 +113,20 @@ h2 {
 img {
   max-width: 100%;
   height: auto;
+  padding: 1em;
 }
 
 @media (max-width: 768px) {
+}
+
+.single-article-view {
+  padding: 1em;
+}
+
+.votes {
+  padding: 1em;
+}
+
+.comments {
+  padding: 1em;
 }

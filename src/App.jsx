@@ -6,18 +6,20 @@ import "./App.css";
 import Header from "./Components/Header";
 import Home from "./Components/Home";
 import Articles from "./Components/Articles";
-// import NavigationBar from "./Components/NavigationBar";
+import SingleArticleView from "./Components/SingleArticleView";
+import NavigationBar from "./Components/NavigationBar";
 
 function App() {
   return (
     <>
       <div className="App">
+        <NavigationBar />
         <Header />
-        {/* <NavigationBar /> */}
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Articles" element={<Articles />} />
+          <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/:articleId" element={<SingleArticleView />} />
         </Routes>
       </div>
     </>
@@ -25,3 +27,14 @@ function App() {
 }
 
 export default App;
+
+//Endpoints--------//
+
+// app.get("/api/topics", getAllTopics);
+// app.get("/api/articles", getAllArticles);
+// app.get("/api/articles/:article_id", getArticleById);
+// app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
+// app.post("/api/articles/:article_id/comments", postCommentsByArticleId);
+// app.patch("/api/articles/:article_id", patchArticleByArticleId);
+// app.delete("/api/comments/:comment_id", deleteCommentByCommentId);
+// app.get("/api/users", getAllUsers);
