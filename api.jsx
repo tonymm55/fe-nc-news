@@ -19,7 +19,6 @@ export const fetchArticles = async (topic) => {
 export const fetchArticleById = async (articleId) => {
   try {
     const response = await ncNewsAPI.get(`/articles/${articleId}`);
-    console.log("GET request successful, response:", response);
     return response;
   } catch (error) {
     console.error("Error status: ", error.response.status);
