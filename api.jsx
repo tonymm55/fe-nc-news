@@ -7,7 +7,7 @@ const ncNewsAPI = axios.create({
 export const fetchArticles = async (topic) => {
   try {
     const response = await ncNewsAPI.get(`/articles?topic=${topic}`);
-    console.log("GET request successful, response:", response);
+    console.log("FA GET request successful, response:", response);
     return response;
   } catch (error) {
     console.error("Error status: ", error.response.status);
@@ -19,6 +19,7 @@ export const fetchArticles = async (topic) => {
 export const fetchArticleById = async (articleId) => {
   try {
     const response = await ncNewsAPI.get(`/articles/${articleId}`);
+    console.log("FAID GET request successful, response:", response);
     return response;
   } catch (error) {
     console.error("Error status: ", error.response.status);
@@ -27,7 +28,19 @@ export const fetchArticleById = async (articleId) => {
   }
 };
 
-export default { fetchArticles, fetchArticleById };
+export const fetchCommentsByArticleId = async (articleId) => {
+  try {
+    const response = await ncNewsAPI.get(`/articles/${articleId}/comments`);
+    console.log("FCAID GET request successful, response:", response);
+    return response;
+  } catch (error) {
+    console.error("Error status: ", error.response.status);
+    console.error("Error data: ", error.response.data);
+    return await Promise.reject(error);
+  }
+};
+
+export default { fetchArticles, fetchArticleById, fetchCommentsByArticleId };
 
 //Endpoints--------//
 

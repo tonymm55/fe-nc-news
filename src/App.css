@@ -74,6 +74,7 @@ ul {
   padding: 0;
   display: flex;
   justify-content: flex-start;
+  font-size: 1.5em;
 }
 
 .nav-links li {
@@ -98,6 +99,10 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+}
+
+p {
+  color: azure;
 }
 
 h1 {
@@ -129,4 +134,15 @@ img {
 
 .comments {
   padding: 1em;
+  color: whitesmoke;
+}
+
+.comments-body {
+  padding: 1em;
+  color: rgb(193, 200, 240);
+  font-weight: 400;
+}
+
+.comment-header {
+  font-weight: 100;
 }
