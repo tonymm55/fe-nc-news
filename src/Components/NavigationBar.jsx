@@ -7,10 +7,10 @@ function NavigationBar() {
       <nav>
         <ul className="nav-links">
           <li>
-            <Link to="/">HOME</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/Articles">BROWSE ALL ARTICLES</Link>
+            <Link to="/articles">Articles</Link>
           </li>
         </ul>
       </nav>
