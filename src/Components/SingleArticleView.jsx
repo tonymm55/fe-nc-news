@@ -20,7 +20,7 @@ function SingleArticleView() {
           if (response && response.data) {
             setArticle(response.data.article);
           } else {
-            console.error("No data in response");
+            console.error("No article data in response");
           }
           setLoading(false);
         })
@@ -34,7 +34,7 @@ function SingleArticleView() {
           if (response && response.data) {
             setComments(response.data.comments);
           } else {
-            console.error("No data in response");
+            console.error("No comments data in response");
           }
           setLoading(false);
         })
