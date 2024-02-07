@@ -8,6 +8,7 @@ import Home from "./Components/Home";
 import Articles from "./Components/Articles";
 import SingleArticleView from "./Components/SingleArticleView";
 import NavigationBar from "./Components/NavigationBar";
+import ArticlesList from "./Components/ArticlesList";
 
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
         <Header />
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/articles" element={<Articles />} />
+          <Route path="/Home" element={<Home />} />
+          <Route path="/articles/*" element={<Articles />} />
+          {/* <Route path="/articles/:article_topic" element={<Articles />} /> */}
           <Route path="/articles/:articleId" element={<SingleArticleView />} />
         </Routes>
       </div>

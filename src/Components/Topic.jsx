@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-function Topic({ setSelectedTopic }) {
+function Topic() {
+  const [selectedTopic, setSelectedTopic] = useState(null);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {

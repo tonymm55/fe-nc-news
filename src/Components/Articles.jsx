@@ -1,35 +1,47 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { fetchArticles } from "../../api";
 import Topic from "./Topic";
-import ArticleList from "./ArticlesList.jsx";
+import ArticlesList from "./ArticlesList.jsx";
 
 function Articles() {
-  const [articles, setArticles] = useState();
-  const [selectedTopic, setSelectedTopic] = useState(" ");
+  const { article_topic } = useParams();
+  console.log(article_topic, "<<< article_topic");
+  const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedTopic, setSelectedTopic] = useState(null);
 
   useEffect(() => {
-    if (selectedTopic) {
-      fetchArticles().then((reponse) => {
-        setArticles(reponse.data.articles);
-        setLoading(false);
-      });
-    } else {
-      fetchArticles(selectedTopic).then((response) => {
+    setLoading(true);
+    console.log(article_topic, "<<< article_topic");
+    const topicToFetch = article_topic || undefined;
+    console.log(topicToFetch, "<<< topicToFetch");
+    fetchArticles(topicToFetch)
+      .then((response) => {
+        console.log(response, "<<< Articles List response");
         setArticles(response.data.articles);
         setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching articles:", error);
+        console.error("Error details:", error.response);
+        setLoading(false);
       });
-    }
-  }, [selectedTopic]);
+
+    setSelectedTopic(topicToFetch);
+  }, [article_topic]);
 
   return (
     <div>
       {loading ? (
-        <p>Loading article...</p>
+        <p>Loading Articles...</p>
       ) : (
         <>
-          <Topic setSelectedTopic={setSelectedTopic} />
-          <ArticleList articles={articles} selectedTopic={selectedTopic} />
+          <Topic />
+          <ArticlesList
+            articles={articles}
+            selectedTopic={selectedTopic || "All Articles"}
+          />
         </>
       )}
     </div>

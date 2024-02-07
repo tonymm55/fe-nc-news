@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const ArticleCard = (props) => {
   let article = props.article;
+
   return (
     <div key={article.article_id}>
       <Link to={`/articles/${article.article_id}`}>

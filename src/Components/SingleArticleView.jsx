@@ -1,6 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { fetchArticleById, fetchCommentsByArticleId } from "../../api";
+import {
+  fetchArticleById,
+  fetchCommentsByArticleId,
+  patchArticleVotes,
+} from "../../api";
 import { useState, useEffect, useRef } from "react";
 import CommentsCard from "./CommentsCard";
 
@@ -10,6 +14,7 @@ function SingleArticleView() {
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false);
+  const [hasComments, setHasComments] = useState(false);
   const commentsRef = useRef(null);
 
   useEffect(() => {
@@ -17,10 +22,11 @@ function SingleArticleView() {
       setLoading(true);
       fetchArticleById(articleId)
         .then((response) => {
+          console.log(response, "<<< response data");
           if (response && response.data) {
             setArticle(response.data.article);
           } else {
-            console.error("No data in response");
+            console.error("No article data in response");
           }
           setLoading(false);
         })
@@ -31,10 +37,11 @@ function SingleArticleView() {
 
       fetchCommentsByArticleId(articleId)
         .then((response) => {
-          if (response && response.data) {
+          if (response && response.data && response.data.comments.length > 0) {
             setComments(response.data.comments);
+            setHasComments(true);
           } else {
-            console.error("No data in response");
+            setHasComments(false);
           }
           setLoading(false);
         })
@@ -44,12 +51,44 @@ function SingleArticleView() {
     }
   }, [articleId]);
 
+  // Show article comments onClick event
   const handleToggleComments = () => {
     setShowComments(!showComments);
     if (!showComments && commentsRef.current) {
       setTimeout(() => {
         commentsRef.current.scrollIntoView({ behavior: "smooth" });
       }, 100);
+    }
+  };
+
+  // Use of Optmisitic Rendering before Patch Request.
+  const handleVoteChange = (direction) => {
+    if (article && typeof article.votes === "number") {
+      setArticle((prevArticle) => ({
+        ...prevArticle,
+        votes: prevArticle.votes + direction,
+      }));
+
+      patchArticleVotes(articleId, direction)
+        .then((response) => {
+          console.log(response, "<<<patchArticleResponse");
+          if (
+            response.data &&
+            typeof response.data.article.votes === "number"
+          ) {
+            setArticle((prevArticle) => ({
+              ...prevArticle,
+              votes: response.data.article.votes,
+            }));
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to update votes:", error);
+          setArticle((prevArticle) => ({
+            ...prevArticle,
+            votes: prevArticle.votes - direction,
+          }));
+        });
     }
   };
 
@@ -64,14 +103,22 @@ function SingleArticleView() {
           <p>Article by: {article.author} </p>
           <img src={article.article_img_url} alt={article.title} />
           <p>{article.body}</p>
-          <p className="votes">Votes: ⬆️ {article.votes} ⬇️</p>
-          <p className="comments">Comment Count: 💬 {article.comment_count}</p>
+          <div className="vote-container">
+            <p className="votes">Vote Count: {article.votes}</p>
+            <button onClick={() => handleVoteChange(1)}>Vote ⬆</button>
+            <button onClick={() => handleVoteChange(-1)}>Vote ⬇</button>
+          </div>
+          <p className="comments">💬 Comment Count: {article.comment_count}</p>
           <button onClick={handleToggleComments}>Click for Comments</button>
+
           <div ref={commentsRef}>
-            {showComments &&
+            {showComments && !hasComments ? (
+              <p>This article hasn't received comments yet, so be the first!</p>
+            ) : (
               comments.map((comment) => (
                 <CommentsCard key={comment.comment_id} comment={comment} />
-              ))}
+              ))
+            )}
           </div>
         </>
       ) : null}
