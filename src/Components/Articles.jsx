@@ -33,12 +33,16 @@ function Articles() {
 
   return (
     <div>
-      {loading ? (
-        <p>Loading Articles...</p>
+      {article_topic ? (
+        <>{loading ? <p>Loading Articles...</p> : <Topic />}</>
       ) : (
         <>
           <Topic />
-          <ArticlesList articles={articles} selectedTopic={selectedTopic} />
+          {loading ? (
+            <p>Loading Articles...</p>
+          ) : (
+            <ArticlesList articles={articles} selectedTopic={selectedTopic} />
+          )}
         </>
       )}
     </div>

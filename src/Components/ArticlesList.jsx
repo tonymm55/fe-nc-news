@@ -1,19 +1,17 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchArticles } from "../../api";
 import ArticleCard from "./ArticleCard";
 import { useParams } from "react-router-dom";
 
 export default function ArticlesList() {
   const { article_topic } = useParams();
-  const [articles, setArticles] = useState();
+  const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     fetchArticles(article_topic)
       .then((response) => {
-        console.log(response, "<<<ArticlesList response");
         setArticles(response.data.articles);
       })
       .catch((error) => {
@@ -36,10 +34,13 @@ export default function ArticlesList() {
         </h2>
       </section>
       <section className="articles">
-        {articles &&
+        {loading ? (
+          <p>Loading Articles...</p>
+        ) : (
           articles.map((article) => (
             <ArticleCard key={article.article_id} article={article} />
-          ))}
+          ))
+        )}
       </section>
     </>
   );

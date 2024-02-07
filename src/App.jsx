@@ -19,8 +19,8 @@ function App() {
 
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/articles/" element={<Articles />} />
-          <Route path="/articles/:article_topic" element={<Articles />} />
+          <Route path="/articles" element={<Articles />} />
+          <Route path="/topics/:article_topic" element={<Articles />} />
           <Route path="/articles/:articleId" element={<SingleArticleView />} />
         </Routes>
       </div>

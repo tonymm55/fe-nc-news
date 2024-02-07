@@ -25,19 +25,25 @@ function Topic() {
           </li>
           <li className="menu-item">
             <Link
-              to="/articles/football"
+              to={`/topics/${"football"}`}
               onClick={() => handleTopic("football")}
             >
               Football
             </Link>
           </li>
           <li className="menu-item">
-            <Link to="/articles/cooking" onClick={() => handleTopic("cooking")}>
+            <Link
+              to={`/topics/${"cooking"}`}
+              onClick={() => handleTopic("cooking")}
+            >
               Cooking
             </Link>
           </li>
           <li className="menu-item">
-            <Link to="/articles/coding" onClick={() => handleTopic("coding")}>
+            <Link
+              to={`/topics/${"coding"}`}
+              onClick={() => handleTopic("coding")}
+            >
               Coding
             </Link>
           </li>
