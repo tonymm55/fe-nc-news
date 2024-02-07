@@ -49,8 +49,8 @@ export const patchArticleVotes = async (articleId, incVotes) => {
     });
     return response;
   } catch (error) {
-    // console.error("Error status: ", error.response.status);
-    // console.error("Error data: ", error.response.data);
+    console.error("Error status: ", error.response.status);
+    console.error("Error data: ", error.response.data);
     return await Promise.reject(error);
   }
 };

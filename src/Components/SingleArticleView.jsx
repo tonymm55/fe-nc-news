@@ -12,7 +12,7 @@ function SingleArticleView() {
   const { articleId } = useParams();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState();
   const [showComments, setShowComments] = useState(false);
   const [hasComments, setHasComments] = useState(false);
   const commentsRef = useRef(null);
@@ -22,7 +22,6 @@ function SingleArticleView() {
       setLoading(true);
       fetchArticleById(articleId)
         .then((response) => {
-          console.log(response, "<<< response data");
           if (response && response.data) {
             setArticle(response.data.article);
           } else {
