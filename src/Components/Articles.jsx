@@ -13,18 +13,14 @@ function Articles() {
 
   useEffect(() => {
     setLoading(true);
-    console.log(article_topic, "<<< article_topic");
     const topicToFetch = article_topic || null;
-    console.log(topicToFetch, "<<< topicToFetch");
     fetchArticles(topicToFetch)
       .then((response) => {
-        console.log(response, "<<< Articles response");
         setArticles(response.data.articles);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching articles:", error);
-        console.error("Error details:", error.response);
         setLoading(false);
       });
 
@@ -33,17 +29,11 @@ function Articles() {
 
   return (
     <div>
-      {article_topic ? (
-        <>{loading ? <p>Loading Articles...</p> : <Topic />}</>
+      <Topic onTopicSelect={setSelectedTopic} />
+      {loading ? (
+        <p>Loading Articles...</p>
       ) : (
-        <>
-          <Topic />
-          {loading ? (
-            <p>Loading Articles...</p>
-          ) : (
-            <ArticlesList articles={articles} selectedTopic={selectedTopic} />
-          )}
-        </>
+        <ArticlesList articles={articles} selectedTopic={selectedTopic} />
       )}
     </div>
   );

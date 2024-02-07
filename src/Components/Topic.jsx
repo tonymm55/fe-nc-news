@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Topic() {
-  const [selectedTopic, setSelectedTopic] = useState(null);
+function Topic({ onTopicSelect }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(!open);
   };
+
   const handleTopic = (topic) => {
     setOpen(false);
-    setSelectedTopic(topic);
+    onTopicSelect(topic);
   };
 
   return (
@@ -25,7 +25,7 @@ function Topic() {
           </li>
           <li className="menu-item">
             <Link
-              to={`/topics/${"football"}`}
+              to={`/articles/topic/football`}
               onClick={() => handleTopic("football")}
             >
               Football
@@ -33,7 +33,7 @@ function Topic() {
           </li>
           <li className="menu-item">
             <Link
-              to={`/topics/${"cooking"}`}
+              to={`/articles/topic/cooking`}
               onClick={() => handleTopic("cooking")}
             >
               Cooking
@@ -41,7 +41,7 @@ function Topic() {
           </li>
           <li className="menu-item">
             <Link
-              to={`/topics/${"coding"}`}
+              to={`/articles/topic/coding`}
               onClick={() => handleTopic("coding")}
             >
               Coding

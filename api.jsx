@@ -5,11 +5,11 @@ const ncNewsAPI = axios.create({
 });
 
 //northcoders-news-ykvv.onrender.com/api/articles?topic=football
-export const fetchArticles = async (topic) => {
+export const fetchArticles = async (article_topic) => {
   try {
     const response = await ncNewsAPI.get(`/articles`, {
       params: {
-        topic: topic,
+        topic: article_topic,
       },
     });
     return response;
@@ -54,5 +54,3 @@ export const patchArticleVotes = async (articleId, incVotes) => {
     return await Promise.reject(error);
   }
 };
-
-export default ncNewsAPI;

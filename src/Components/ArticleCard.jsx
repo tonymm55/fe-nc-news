@@ -6,7 +6,7 @@ const ArticleCard = (props) => {
 
   return (
     <div key={article.article_id}>
-      <Link to={`/articles/${article.article_id}`}>
+      <Link to={`/articles/singleView/${article.article_id}`}>
         <img src={article.article_img_url} alt={article.title} />
         <p>Title: {article.title}</p>
         <p>Author: {article.author} </p>

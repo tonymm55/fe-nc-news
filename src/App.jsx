@@ -8,7 +8,6 @@ import Home from "./Components/Home";
 import Articles from "./Components/Articles";
 import SingleArticleView from "./Components/SingleArticleView";
 import NavigationBar from "./Components/NavigationBar";
-import ArticlesList from "./Components/ArticlesList";
 
 function App() {
   return (
@@ -18,10 +17,17 @@ function App() {
         <Header />
 
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          {/* <Route
+            path="/articles/:articleId/comments"
+            element={<SingleArticleView />}
+          /> */}
+          <Route
+            path="/articles/singleView/:articleId"
+            element={<SingleArticleView />}
+          />
+          <Route path="/articles/topic/:article_topic" element={<Articles />} />
           <Route path="/articles" element={<Articles />} />
-          <Route path="/topics/:article_topic" element={<Articles />} />
-          <Route path="/articles/:articleId" element={<SingleArticleView />} />
         </Routes>
       </div>
     </>
