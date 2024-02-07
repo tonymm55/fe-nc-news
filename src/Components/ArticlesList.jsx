@@ -11,9 +11,9 @@ export default function ArticlesList() {
 
   useEffect(() => {
     setLoading(true);
-    fetchArticles()
+    fetchArticles(article_topic)
       .then((response) => {
-        console.log(response, "<<<Articles List response");
+        console.log(response, "<<<ArticlesList response");
         setArticles(response.data.articles);
       })
       .catch((error) => {
@@ -28,9 +28,11 @@ export default function ArticlesList() {
     <>
       <section>
         <h2>
-          {article_topic === " "
+          {article_topic === undefined || null
             ? "All Articles Displayed"
-            : `All ${article_topic} Articles Displayed`}
+            : `All ${article_topic?.charAt(0)?.toUpperCase()}${
+                article_topic?.slice(1) || ""
+              } Articles Displayed`}
         </h2>
       </section>
       <section className="articles">

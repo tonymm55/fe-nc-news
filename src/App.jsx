@@ -18,9 +18,9 @@ function App() {
         <Header />
 
         <Routes>
-          <Route path="/Home" element={<Home />} />
-          <Route path="/articles/*" element={<Articles />} />
-          {/* <Route path="/articles/:article_topic" element={<Articles />} /> */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/articles/" element={<Articles />} />
+          <Route path="/articles/:article_topic" element={<Articles />} />
           <Route path="/articles/:articleId" element={<SingleArticleView />} />
         </Routes>
       </div>

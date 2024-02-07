@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { fetchArticles } from "../../api";
 import Topic from "./Topic";
 import ArticlesList from "./ArticlesList.jsx";
@@ -14,11 +14,11 @@ function Articles() {
   useEffect(() => {
     setLoading(true);
     console.log(article_topic, "<<< article_topic");
-    const topicToFetch = article_topic || undefined;
+    const topicToFetch = article_topic || null;
     console.log(topicToFetch, "<<< topicToFetch");
     fetchArticles(topicToFetch)
       .then((response) => {
-        console.log(response, "<<< Articles List response");
+        console.log(response, "<<< Articles response");
         setArticles(response.data.articles);
         setLoading(false);
       })
@@ -38,10 +38,7 @@ function Articles() {
       ) : (
         <>
           <Topic />
-          <ArticlesList
-            articles={articles}
-            selectedTopic={selectedTopic || "All Articles"}
-          />
+          <ArticlesList articles={articles} selectedTopic={selectedTopic} />
         </>
       )}
     </div>
