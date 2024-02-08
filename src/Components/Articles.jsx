@@ -6,7 +6,6 @@ import ArticlesList from "./ArticlesList.jsx";
 
 function Articles() {
   const { article_topic } = useParams();
-  console.log(article_topic, "<<< article_topic");
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTopic, setSelectedTopic] = useState(null);
@@ -20,7 +19,7 @@ function Articles() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching articles:", error);
+        console.error("Error fetching articles >>>", error);
         setLoading(false);
       });
 

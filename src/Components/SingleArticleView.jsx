@@ -12,7 +12,7 @@ function SingleArticleView() {
   const { articleId } = useParams();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false);
   const [hasComments, setHasComments] = useState(false);
   const commentsRef = useRef(null);
@@ -30,7 +30,7 @@ function SingleArticleView() {
           setLoading(false);
         })
         .catch((error) => {
-          console.error("Failed to fetch article:", error);
+          console.error("Failed to fetch article >>>", error);
           setLoading(false);
         });
 
@@ -45,12 +45,16 @@ function SingleArticleView() {
           setLoading(false);
         })
         .catch((error) => {
-          console.error("Failed to fetch comments:", error);
+          if (error.response && error.response.status === 404) {
+            setHasComments(false);
+          } else {
+            console.error("Failed to fetch comments >>>", error);
+          }
         });
     }
   }, [articleId]);
 
-  // Show article comments onClick event
+  // Show article comments onClick event below page
   const handleToggleComments = () => {
     setShowComments(!showComments);
     if (!showComments && commentsRef.current) {
@@ -60,7 +64,7 @@ function SingleArticleView() {
     }
   };
 
-  // Use of Optmisitic Rendering before Patch Request.
+  // Optmisitic Rendering before Patch Request
   const handleVoteChange = (direction) => {
     if (article && typeof article.votes === "number") {
       setArticle((prevArticle) => ({
@@ -70,7 +74,6 @@ function SingleArticleView() {
 
       patchArticleVotes(articleId, direction)
         .then((response) => {
-          console.log(response, "<<<patchArticleResponse");
           if (
             response.data &&
             typeof response.data.article.votes === "number"
@@ -82,7 +85,7 @@ function SingleArticleView() {
           }
         })
         .catch((error) => {
-          console.error("Failed to update votes:", error);
+          console.error("Failed to update votes >>>", error);
           setArticle((prevArticle) => ({
             ...prevArticle,
             votes: prevArticle.votes - direction,
@@ -111,13 +114,14 @@ function SingleArticleView() {
           <button onClick={handleToggleComments}>Click for Comments</button>
 
           <div ref={commentsRef}>
-            {showComments && !hasComments ? (
-              <p>This article hasn't received comments yet, so be the first!</p>
-            ) : (
-              comments.map((comment) => (
-                <CommentsCard key={comment.comment_id} comment={comment} />
-              ))
-            )}
+            {showComments &&
+              (hasComments ? (
+                comments.map((comment) => (
+                  <CommentsCard key={comment.comment_id} comment={comment} />
+                ))
+              ) : (
+                <p>This article has no comments - Be the first!</p>
+              ))}
           </div>
         </>
       ) : null}

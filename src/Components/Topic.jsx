@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Topic({ onTopicSelect }) {
+function Topic(props) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -10,7 +10,7 @@ function Topic({ onTopicSelect }) {
 
   const handleTopic = (topic) => {
     setOpen(false);
-    onTopicSelect(topic);
+    props.onTopicSelect(topic);
   };
 
   return (

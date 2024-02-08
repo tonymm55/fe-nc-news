@@ -15,7 +15,7 @@ export default function ArticlesList() {
         setArticles(response.data.articles);
       })
       .catch((error) => {
-        console.error("Error fetching articles:", error);
+        console.error("Error fetching articles >>>", error);
       })
       .finally(() => {
         setLoading(false);
