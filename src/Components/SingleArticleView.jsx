@@ -4,6 +4,7 @@ import {
   fetchArticleById,
   fetchCommentsByArticleId,
   patchArticleVotes,
+  postArticleComment,
 } from "../../api";
 import { useState, useEffect, useRef } from "react";
 import CommentsCard from "./CommentsCard";
@@ -54,6 +55,24 @@ function SingleArticleView() {
         });
     }
   }, [articleId]);
+
+  const handleNewComment = async (newComment) => {
+    try {
+      const response = await postArticleComment(
+        articleId,
+        newComment.username,
+        newComment.body
+      );
+      console.log("Comment response >>>", response.data.postedComment);
+      if (response.status === 201) {
+        setComments((prevComments) => [...prevComments, response.data]);
+      } else {
+        console.error(`Failed to post comment: Status ${response.status}`);
+      }
+    } catch (error) {
+      console.error("An error occurred while posting comment >>>", error);
+    }
+  };
 
   // Show article comments onClick event below page
   const handleToggleComments = () => {
@@ -115,15 +134,24 @@ function SingleArticleView() {
           <button onClick={handleToggleComments}>Click for Comments</button>
 
           <div ref={commentsRef}>
-            {showComments &&
-              (hasComments ? (
-                comments.map((comment) => (
-                  <CommentsCard key={comment.comment_id} comment={comment} />
-                ))
-              ) : (
-                <p>This article has no comments - Be the first!</p>
-              ))}
-            <CommentForm articleId={articleId} />
+            {showComments && (
+              <>
+                {hasComments ? (
+                  comments.map((comment, index) => (
+                    <CommentsCard
+                      key={comment.comment_id || index}
+                      comment={comment}
+                    />
+                  ))
+                ) : (
+                  <p>This article has no comments - Be the first!</p>
+                )}
+                <CommentForm
+                  articleId={articleId}
+                  onCommentSubmit={handleNewComment}
+                />
+              </>
+            )}
           </div>
         </>
       ) : null}
