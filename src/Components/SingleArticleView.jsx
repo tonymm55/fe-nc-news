@@ -7,6 +7,7 @@ import {
 } from "../../api";
 import { useState, useEffect, useRef } from "react";
 import CommentsCard from "./CommentsCard";
+import CommentForm from "./CommentForm";
 
 function SingleArticleView() {
   const { articleId } = useParams();
@@ -122,6 +123,7 @@ function SingleArticleView() {
               ) : (
                 <p>This article has no comments - Be the first!</p>
               ))}
+            <CommentForm articleId={articleId} />
           </div>
         </>
       ) : null}
