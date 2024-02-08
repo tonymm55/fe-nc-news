@@ -18,8 +18,16 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          {/* <Route
+            path="/articles/:articleId/comments"
+            element={<SingleArticleView />}
+          /> */}
+          <Route
+            path="/articles/singleView/:articleId"
+            element={<SingleArticleView />}
+          />
+          <Route path="/articles/topic/:article_topic" element={<Articles />} />
           <Route path="/articles" element={<Articles />} />
-          <Route path="/articles/:articleId" element={<SingleArticleView />} />
         </Routes>
       </div>
     </>

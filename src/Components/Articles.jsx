@@ -1,36 +1,38 @@
+import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { fetchArticles } from "../../api";
 import Topic from "./Topic";
-import ArticleList from "./ArticlesList.jsx";
+import ArticlesList from "./ArticlesList.jsx";
 
 function Articles() {
-  const [articles, setArticles] = useState();
-  const [selectedTopic, setSelectedTopic] = useState(" ");
+  const { article_topic } = useParams();
+  const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedTopic, setSelectedTopic] = useState(null);
 
   useEffect(() => {
-    if (selectedTopic) {
-      fetchArticles().then((reponse) => {
-        setArticles(reponse.data.articles);
-        setLoading(false);
-      });
-    } else {
-      fetchArticles(selectedTopic).then((response) => {
+    setLoading(true);
+    const topicToFetch = article_topic || null;
+    fetchArticles(topicToFetch)
+      .then((response) => {
         setArticles(response.data.articles);
         setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching articles >>>", error);
+        setLoading(false);
       });
-    }
-  }, [selectedTopic]);
+
+    setSelectedTopic(topicToFetch);
+  }, [article_topic]);
 
   return (
     <div>
+      <Topic onTopicSelect={setSelectedTopic} />
       {loading ? (
-        <p>Loading article...</p>
+        <p>Loading Articles...</p>
       ) : (
-        <>
-          <Topic setSelectedTopic={setSelectedTopic} />
-          <ArticleList articles={articles} selectedTopic={selectedTopic} />
-        </>
+        <ArticlesList articles={articles} selectedTopic={selectedTopic} />
       )}
     </div>
   );
