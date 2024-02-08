@@ -13,11 +13,10 @@ export default function ArticlesList() {
     fetchArticles(article_topic)
       .then((response) => {
         setArticles(response.data.articles);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching articles >>>", error);
-      })
-      .finally(() => {
         setLoading(false);
       });
   }, [article_topic]);
