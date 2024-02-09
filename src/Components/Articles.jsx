@@ -19,7 +19,7 @@ function Articles() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching articles >>>", error);
+        console.error("Error fetching articles: ", error);
         setLoading(false);
       });
 
