@@ -18,10 +18,10 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route
+          <Route
             path="/articles/:articleId/comments"
             element={<SingleArticleView />}
-          /> */}
+          />
           <Route
             path="/articles/singleView/:articleId"
             element={<SingleArticleView />}
