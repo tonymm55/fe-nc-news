@@ -19,12 +19,12 @@ function CommentForm({ onCommentSubmit }) {
       await onCommentSubmit(newComment);
       setSuccessMessage("Your comment has been posted successfully!");
       setBody("");
+      setIsSubmitting(false); // reset
     } catch (error) {
       setErrorMessage(
         "There was an error posting your comment. Please try again later."
       );
-    } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false); // prevent
     }
   };
 

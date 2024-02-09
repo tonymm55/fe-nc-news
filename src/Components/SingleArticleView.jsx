@@ -63,7 +63,6 @@ function SingleArticleView() {
         newComment.username,
         newComment.body
       );
-      console.log("Comment response >>>", response.data.postedComment);
       if (response.status === 201) {
         setComments((prevComments) => [...prevComments, response.data]);
       } else {
@@ -137,11 +136,8 @@ function SingleArticleView() {
             {showComments && (
               <>
                 {hasComments ? (
-                  comments.map((comment, index) => (
-                    <CommentsCard
-                      key={comment.comment_id || index}
-                      comment={comment}
-                    />
+                  comments.map((comment) => (
+                    <CommentsCard key={comment.comment_id} comment={comment} />
                   ))
                 ) : (
                   <p>This article has no comments - Be the first!</p>

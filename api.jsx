@@ -61,16 +61,6 @@ export const patchArticleVotes = async (articleId, incVotes) => {
 // app.post("/api/articles/:article_id/comments", postCommentsByArticleId);
 // northcoders-news-ykvv.onrender.com/api/articles/2/comments
 
-// "comments": [
-// {
-// "comment_id": 162,
-// "votes": 14,
-// "created_at": "2020-10-03T19:22:00.000Z",
-// "author": "grumpy19",
-// "body": "Et suscipit maxime sit sunt consequuntur consequatur fugiat molestias. Et quis enim vero.",
-// "article_id": 2
-// },
-
 export const postArticleComment = async (articleId, username, body) => {
   console.log(
     {
@@ -93,56 +83,10 @@ export const postArticleComment = async (articleId, username, body) => {
   } catch (error) {
     console.error("Error occurred while posting article >>>", error);
     console.error(
-      "Error status >>>",
+      "Error status:",
       error.response ? error.response.status : null
     );
-    console.error(
-      "Error data >>>",
-      error.response ? error.response.data : null
-    );
+    console.error("Error data:", error.response ? error.response.data : null);
     throw error;
   }
 };
-
-// export const postItem = ({
-//   item_name,
-//   description,
-//   img_url,
-//   price,
-//   category_name,
-// }) => {
-//   console.log(
-//     {
-//       item_name,
-//       description,
-//       img_url,
-//       price,
-//       category_name,
-//     },
-//     "<<< Request body"
-//   );
-// }
-// Check for the fields being empty or undefined
-// if (!item_name || !description || !img_url || !price || !category_name) {
-//   console.error("One or more fields are empty or undefined");
-//   return Promise.reject("One or more fields are empty or undefined");
-// }
-
-//   return ncmarketplaceAPI
-//     .post("/items/", {
-//       item_name,
-//       description,
-//       img_url,
-//       price,
-//       category_name,
-//     })
-//     .then((response) => {
-//       console.log("POST request successful, response:", response);
-//       return response;
-//     })
-//     .catch((error) => {
-//       console.error("Error status: ", error.response.status);
-//       console.error("Error data: ", error.response.data);
-//       return Promise.reject(error);
-//     });
-// }
