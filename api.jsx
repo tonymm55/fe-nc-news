@@ -90,3 +90,15 @@ export const postArticleComment = async (articleId, username, body) => {
     throw error;
   }
 };
+
+// app.delete("/api/comments/:comment_id", deleteCommentByCommentId);
+export const deleteCommentByCommentId = async (commentId) => {
+  try {
+    const response = await ncNewsAPI.delete(`/comments/${commentId}`);
+    return response;
+  } catch (error) {
+    console.error("Error status: ", error.response.status);
+    console.error("Error data: ", error.response.data);
+    return await Promise.reject(error);
+  }
+};

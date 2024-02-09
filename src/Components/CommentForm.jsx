@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function CommentForm({ onCommentSubmit }) {
+function CommentForm({ articleId, onCommentSubmit, username }) {
   const [body, setBody] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -13,18 +13,23 @@ function CommentForm({ onCommentSubmit }) {
 
     try {
       const newComment = {
-        username: "tickle122", // temporary solution until I've added authentication!
+        username: username, // temporary solution until I've added authentication!
         body: body,
       };
+
       await onCommentSubmit(newComment);
       setSuccessMessage("Your comment has been posted successfully!");
       setBody("");
-      setIsSubmitting(false); // reset
+      setIsSubmitting(false);
+
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 5000);
     } catch (error) {
       setErrorMessage(
         "There was an error posting your comment. Please try again later."
       );
-      setIsSubmitting(false); // prevent
+      setIsSubmitting(false);
     }
   };
 
@@ -34,7 +39,7 @@ function CommentForm({ onCommentSubmit }) {
         className="comment-field"
         name="body"
         value={body}
-        onChange={(e) => setBody(e.target.value)}
+        onChange={(event) => setBody(event.target.value)}
         placeholder="Comments..."
         required
       />
