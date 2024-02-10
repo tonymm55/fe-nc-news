@@ -20,10 +20,13 @@ export default function ArticlesList() {
         let sortedArticles = response.data.articles;
 
         if (searchParams.get("sort_by") === "comment_count") {
-          sortedArticles = sortedArticles.sort((a, b) =>
-            searchParams.get("order") === "ASC"
-              ? a.comment_count - b.comment_count
-              : b.comment_count - a.comment_count
+          sortedArticles = sortedArticles.sort(
+            (a, b) =>
+              searchParams.get("order") === "ASC"
+                ? parseInt(a.comment_count, 10) - parseInt(b.comment_count, 10)
+                : parseInt(b.comment_count, 10) - parseInt(a.comment_count, 10)
+            // ? a.comment_count - b.comment_count
+            // : b.comment_count - a.comment_count
           );
         } else if (searchParams.get("sort_by") === "created_at") {
           sortedArticles = sortedArticles.sort((a, b) =>
@@ -55,13 +58,9 @@ export default function ArticlesList() {
     ) {
       newOrder = "DESC";
     }
-    console.log(`Sorting by: ${sortType}, New Order: ${newOrder}`);
+
     setSearchParams({ sort_by: sortType, order: newOrder });
   };
-
-  useEffect(() => {
-    console.log("Updated search params useEffect >>>", searchParams.toString());
-  }, [searchParams]);
 
   return (
     <>
