@@ -8,11 +8,13 @@ const ncNewsAPI = axios.create({
 });
 
 //northcoders-news-ykvv.onrender.com/api/articles?topic=football
-export const fetchArticles = async (article_topic) => {
+export const fetchArticles = async (article_topic, sort, order) => {
   try {
     const response = await ncNewsAPI.get(`/articles`, {
       params: {
         topic: article_topic,
+        sort: sort,
+        order: order,
       },
     });
     return response;
@@ -102,3 +104,16 @@ export const deleteCommentByCommentId = async (commentId) => {
     return await Promise.reject(error);
   }
 };
+
+// export const fetchArticles = async (params) => {
+//   try {
+//     const response = await ncNewsAPI.get(`/articles`, {
+//       params: params,
+//     });
+//     return response;
+//   } catch (error) {
+//     console.error("Error status: ", error.response.status);
+//     console.error("Error data: ", error.response.data);
+//     return Promise.reject(error);
+//   }
+// };
